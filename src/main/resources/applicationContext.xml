@@ -12,10 +12,24 @@
   <context:component-scan base-package="com.jose" annotation-config="true"/>
 
   <!--<context:annotation-config/>-->
-  <aop:aspectj-autoproxy/>
-
+  <aop:aspectj-autoproxy proxy-target-class="true"/>
 
   <import resource="applicationContext-datasource.xml"/>
 
+  <!-- spring test -->
+  <bean id="aopRun" class="com.jose.service.impl.spring.aop.AopRun" />
+  <bean id="audience" class="com.jose.service.impl.spring.aop.Audience" />
 
+  <!-- xml aop test -->
+  <!--<bean id="aopRunXml" clacom.jose.service.impl.AopRunXmlnXml" />-->
+  <!--<bean id="audienceXml" clacom.jose.service.impl.AudienceXmleXml" />-->
+  <aop:config>
+    <aop:aspect ref="audienceXml">
+      <aop:pointcut id="xmlPoint" expression="execution(* com.jose.service.impl.spring.aop.AopRunXml.*(..))" />
+      <aop:before method="beforeXml" pointcut-ref="xmlPoint" />
+      <aop:after method="afterXml" pointcut-ref="xmlPoint" />
+      <aop:after-returning method="xmlAfterReturning" pointcut-ref="xmlPoint" />
+      <aop:around method="xmlAround" pointcut-ref="xmlPoint" />
+    </aop:aspect>
+  </aop:config>
 </beans>

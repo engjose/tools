@@ -1,4 +1,4 @@
 # Ignore everything in this directory
-*
+../impl/AopRun.java
 # Except this file
 !.gitignore
